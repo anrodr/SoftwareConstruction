@@ -1,0 +1,43 @@
+﻿@page "/countries"
+@using Orders.Shared.Entities
+@inject IRepository repository
+
+<h3>Paises</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>País</th>
+            <th>    </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Colombia</th>
+            <th>        </th>
+        </tr>
+        <tr>
+            <th>Argentina</th>
+            <th>        </th>
+        </tr>
+        <tr>
+            <th>Italia</th>
+            <th>        </th>
+        </tr>
+        <tr>
+            <th>Perú</th>
+            <th>        </th>
+        </tr>
+    </tbody>
+
+</table>
+
+@code {
+    public List<Country>? Countries { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHppt = await repository.GetAsync<List<Country>>("api/countries");
+        Countries = responseHppt.ActionResponse!;
+    }
+}
